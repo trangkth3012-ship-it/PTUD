@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2YZ4BWZYE7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2YZ4BWZYE7');
+</script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Online của Tôi</title>
+  <style>
+    :root {
+      --bg1: #fff2f7;
+      --bg2: #ffe6f0;
+      --pink: #ff4d8d;
+      --pink-deep: #ec3d7d;
+      --rose: #ff8bb2;
+      --warm: #ffd166;
+      --purple: #7a5cff;
+      --blue: #5bc0eb;
+      --cyan: #7ee7d9;
+      --white: #ffffff;
+      --text: #5a2147;
+      --card: rgba(255,255,255,0.72);
+      --shadow: rgba(236, 61, 125, 0.25);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2), #fff9fb 80%);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px 18px;
+    }
+
+    .page-shell {
+      position: relative;
+      width: min(100%, 980px);
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      position: relative;
+      width: min(100%, 760px);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 25px 60px var(--shadow);
+      text-align: center;
+      padding: 32px 24px 26px;
+      border-radius: 28px;
+      backdrop-filter: blur(4px);
+    }
+
+    .logo-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--white);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border: 4px solid rgba(255,255,255,0.75);
+      animation: floatLogo 4s ease-in-out infinite;
+    }
+
+    .logo:nth-child(2) { animation-delay: 0.5s; }
+    .logo:nth-child(3) { animation-delay: 1s; }
+
+    .logo.ueh { background: linear-gradient(135deg, #d62d6d, #f99bc0); }
+    .logo.ctd { background: linear-gradient(135deg, #2f5eff, #65b8ff); }
+    .logo.bit { background: linear-gradient(135deg, #ff8a00, #ffbf47); }
+
+    h1 {
+      margin: 10px 0 14px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--pink-deep);
+      text-shadow: 0 5px 20px rgba(255, 77, 141, 0.22);
+    }
+
+    .subtext {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      color: rgba(90, 33, 71, 0.85);
+      letter-spacing: 0.04em;
+    }
+
+    .wish-note {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255, 77, 141, 0.25);
+      font-weight: 700;
+      color: var(--pink-deep);
+      box-shadow: 0 8px 18px rgba(236, 61, 125, 0.15);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #floating-layer {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .float-item {
+      position: absolute;
+      top: -12%;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: auto;
+      cursor: pointer;
+      user-select: none;
+      animation: fall linear forwards;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.12));
+    }
+
+    .float-item.bubble {
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.8);
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.6), 0 15px 25px rgba(0,0,0,0.08);
+    }
+
+    .float-item.heart {
+      font-size: 28px;
+      color: #ff5d96;
+      text-shadow: 0 0 20px rgba(255, 93, 150, 0.35);
+    }
+
+    .wish-banner {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.85);
+      width: min(88vw, 620px);
+      padding: 26px 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 25px 60px rgba(236, 61, 125, 0.28);
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.45s ease;
+      z-index: 5;
+    }
+
+    .wish-banner.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .wish-banner h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--pink-deep);
+    }
+
+    .wish-banner p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .particle {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      animation: explode 0.7s ease-out forwards;
+      --dx: 0px;
+      --dy: 0px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translate3d(0, -10vh, 0) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(var(--drift), 110vh, 0) scale(1.25) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes explode {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.2);
+      }
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 560px) {
+      .hero-card { padding: 22px 18px 24px; }
+      .logo { width: 74px; height: 74px; }
+      .subtext { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="floating-layer" aria-hidden="true"></div>
+
+  <div class="page-shell">
+    <div class="hero-card">
+      <div class="logo-group" aria-label="Các logo đối tác">
+        <div class="logo ueh">UEH</div>
+        <div class="logo ctd">CTD</div>
+        <div class="logo bit">BIT</div>
+      </div>
+
+      <h1>BIT Xin chào thế giới<br />TMĐT!</h1>
+      <div class="subtext">Hân hoan chúc mừng Ngày Phụ nữ Việt Nam 20/10</div>
+      <div class="wish-note" id="wishTrigger">Nhấn vào đây để chúc mừng</div>
+    </div>
+  </div>
+
+  <div class="wish-banner" id="wishBanner" aria-live="polite">
+    <h2>Chúc mừng 20/10!</h2>
+    <p>
+      Gửi đến các chị em, các cô gái, các người phụ nữ yêu thương.<br>
+      Mong mỗi ngày đều tươi đẹp, hạnh phúc, mạnh mẽ và được yêu thương nhiều hơn nữa.
+    </p>
+  </div>
+
+  <script>
+    const layer = document.getElementById('floating-layer');
+    const banner = document.getElementById('wishBanner');
+    const trigger = document.getElementById('wishTrigger');
+
+    const colors = ['#ff5e9a', '#ff9cc4', '#ffd166', '#7ee7d9', '#5bc0eb', '#7a5cff', '#ff7a7a'];
+
+    function createFloatingItem() {
+      const item = document.createElement('div');
+      const isBubble = Math.random() > 0.35;
+      item.className = `float-item ${isBubble ? 'bubble' : 'heart'}`;
+
+      const size = isBubble ? (22 + Math.random() * 38) : (20 + Math.random() * 24);
+      const left = Math.random() * 96 + 2;
+      const drift = (Math.random() * 180 - 90) + 'px';
+
+      item.style.left = left + '%';
+      item.style.width = size + 'px';
+      item.style.height = isBubble ? size + 'px' : 'auto';
+      item.style.setProperty('--drift', drift);
+      item.style.animationDuration = (7 + Math.random() * 7) + 's';
+
+      if (isBubble) {
+        item.style.background = 'radial-gradient(circle at 35% 35%, rgba(255,255,255,0.95), ' + colors[Math.floor(Math.random() * colors.length)] + ' 60%, rgba(255,255,255,0.35) 100%)';
+      } else {
+        item.textContent = '❤';
+        item.style.fontSize = (18 + Math.random() * 26) + 'px';
+        item.style.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      item.addEventListener('click', function () {
+        burstAt(item);
+        showWish();
+      });
+
+      layer.appendChild(item);
+      setTimeout(() => item.remove(), 14000);
+    }
+
+    function burstAt(item) {
+      const rect = item.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 18; i++) {
+        const particle = document.createElement('span');
+        particle.className = 'particle';
+        particle.style.left = centerX + 'px';
+        particle.style.top = centerY + 'px';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+        const angle = (Math.PI * 2 * i) / 18;
+        const distance = 18 + Math.random() * 80;
+        particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+        particle.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 700);
+      }
+
+      item.remove();
+    }
+
+    function showWish() {
+      banner.classList.add('show');
+      setTimeout(() => banner.classList.remove('show'), 2600);
+    }
+
+    trigger.addEventListener('click', showWish);
+    document.addEventListener('click', function (event) {
+      const isFloating = event.target.closest('.float-item');
+      if (!isFloating && !event.target.closest('.wish-note')) {
+        showWish();
+      }
+    });
+
+    setInterval(createFloatingItem, 650);
+    for (let i = 0; i < 20; i++) {
+      setTimeout(createFloatingItem, i * 120);
+    }
+  </script>
+</body>
+</html>
